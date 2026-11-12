@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+.venv/
+venv/
+env/
+
+# Environment variables / secrets
+.env
+.env.*
+
+# MLflow local tracking store (do not upload)
+mlruns/
+mlflow.db
+mlflow.db-shm
+mlflow.db-wal
+mlartifacts/
+
+# Downloaded or locally saved Hugging Face model weights
+outputs/hf_model_*/
+outputs/**/pytorch_model.bin
+outputs/**/*.safetensors
+outputs/**/*.pt
+outputs/**/*.pth
+
+# Editor / operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
