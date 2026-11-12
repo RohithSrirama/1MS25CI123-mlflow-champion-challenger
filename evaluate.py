@@ -410,6 +410,8 @@ def main():
         mlflow.log_artifact(str(summary_path))
         mlflow.log_artifact(str(comparison_plot))
         mlflow.log_artifact(str(disagreement_path))
+        mlflow.log_artifact("README.md")
+        mlflow.log_artifact("requirements.txt")
 
     print("\n========== COMPARISON ==========")
     print(pd.DataFrame(
