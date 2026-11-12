@@ -1,0 +1,101 @@
+text,reference,prediction,reference_label,predicted_label,correct,confidence
+The movie was absolutely wonderful.,1,1,positive,positive,True,0.9998785257339478
+I loved every minute of this film.,1,1,positive,positive,True,0.9998587369918823
+The acting was natural and convincing.,1,1,positive,positive,True,0.9998657703399658
+This is one of the best films I have seen.,1,1,positive,positive,True,0.9998489618301392
+The story was engaging from beginning to end.,1,1,positive,positive,True,0.999796450138092
+The music made the scenes even better.,1,1,positive,positive,True,0.998831570148468
+The characters were warm and memorable.,1,1,positive,positive,True,0.9998869895935059
+I would happily watch this movie again.,1,1,positive,positive,True,0.999718964099884
+The director delivered an excellent experience.,1,1,positive,positive,True,0.999871015548706
+"The film was funny, moving, and entertaining.",1,1,positive,positive,True,0.9998849630355835
+The performances were outstanding.,1,1,positive,positive,True,0.9998730421066284
+I thoroughly enjoyed the entire show.,1,1,positive,positive,True,0.9998821020126343
+The ending was satisfying and well written.,1,1,positive,positive,True,0.9998791217803955
+The visuals were beautiful and impressive.,1,1,positive,positive,True,0.999884843826294
+This product exceeded my expectations.,1,1,positive,positive,True,0.998874843120575
+The service was quick and friendly.,1,1,positive,positive,True,0.9997487664222717
+I am very happy with this purchase.,1,1,positive,positive,True,0.9998631477355957
+The quality is excellent for the price.,1,1,positive,positive,True,0.9998490810394287
+The staff made the visit enjoyable.,1,1,positive,positive,True,0.999879002571106
+Everything worked perfectly.,1,1,positive,positive,True,0.9998533725738525
+The experience was fantastic.,1,1,positive,positive,True,0.9998811483383179
+I would strongly recommend this to others.,1,1,positive,positive,True,0.998887836933136
+The food was fresh and delicious.,1,1,positive,positive,True,0.9998840093612671
+The atmosphere was pleasant and relaxing.,1,1,positive,positive,True,0.9998788833618164
+The book was interesting and easy to read.,1,1,positive,positive,True,0.9998389482498169
+"The app is simple, useful, and reliable.",1,1,positive,positive,True,0.9998108744621277
+The presentation was clear and informative.,1,1,positive,positive,True,0.9998656511306763
+The trip was comfortable and enjoyable.,1,1,positive,positive,True,0.9998866319656372
+The game is exciting and well designed.,1,1,positive,positive,True,0.9998811483383179
+The show kept me entertained throughout.,1,1,positive,positive,True,0.9998377561569214
+The camera takes sharp and colorful pictures.,1,1,positive,positive,True,0.9997838139533997
+The laptop is fast and handles my work well.,1,1,positive,positive,True,0.999768078327179
+The headphones have clear sound quality.,1,1,positive,positive,True,0.9994452595710754
+The delivery arrived earlier than expected.,1,0,positive,negative,False,0.9824800491333008
+The room was clean and comfortable.,1,1,positive,positive,True,0.9998530149459839
+The course was helpful and well organized.,1,1,positive,positive,True,0.9998663663864136
+The explanation made the topic easy to understand.,1,1,positive,positive,True,0.9974269270896912
+The new update improved the application.,1,1,positive,positive,True,0.9993699193000793
+The team handled the problem very professionally.,1,1,positive,positive,True,0.8822386860847473
+The concert was energetic and memorable.,1,1,positive,positive,True,0.9998886585235596
+The restaurant serves excellent food.,1,1,positive,positive,True,0.9998577833175659
+The design looks modern and attractive.,1,1,positive,positive,True,0.9998584985733032
+The battery lasts longer than I expected.,1,0,positive,negative,False,0.9913691878318787
+The customer support solved my issue quickly.,1,1,positive,positive,True,0.5385130047798157
+The movie had a clever and enjoyable plot.,1,1,positive,positive,True,0.9998831748962402
+The actors brought the characters to life.,1,1,positive,positive,True,0.9997355341911316
+The interface is smooth and easy to use.,1,1,positive,positive,True,0.9996607303619385
+The instructions were accurate and helpful.,1,1,positive,positive,True,0.9997907280921936
+The event was organized perfectly.,1,1,positive,positive,True,0.9998767375946045
+I had a great time today.,1,1,positive,positive,True,0.9998618364334106
+I hated almost everything about this movie.,0,0,negative,negative,True,0.9994986057281494
+The film was boring and unnecessarily long.,0,0,negative,negative,True,0.9996422529220581
+The acting felt stiff and unconvincing.,0,0,negative,negative,True,0.999725878238678
+This was one of the worst films I have seen.,0,0,negative,negative,True,0.9997643828392029
+The story was confusing and poorly written.,0,0,negative,negative,True,0.9998037219047546
+The music was irritating and distracting.,0,0,negative,negative,True,0.9997875094413757
+The characters were dull and forgettable.,0,0,negative,negative,True,0.999808132648468
+I would never watch this movie again.,0,1,negative,positive,False,0.9954097867012024
+The director failed to create an interesting experience.,0,0,negative,negative,True,0.9997836947441101
+The film was neither funny nor entertaining.,0,0,negative,negative,True,0.9997283816337585
+The performances were disappointing.,0,0,negative,negative,True,0.9996485710144043
+I regret spending time watching this show.,0,0,negative,negative,True,0.9887969493865967
+The ending was frustrating and incomplete.,0,0,negative,negative,True,0.9995195865631104
+The visuals looked cheap and unpleasant.,0,0,negative,negative,True,0.9997887015342712
+This product failed to meet my expectations.,0,0,negative,negative,True,0.9997915625572205
+The service was slow and rude.,0,0,negative,negative,True,0.999609649181366
+I am very unhappy with this purchase.,0,0,negative,negative,True,0.9997047781944275
+The quality is terrible for the price.,0,0,negative,negative,True,0.9994435906410217
+The staff made the visit uncomfortable.,0,0,negative,negative,True,0.9990856647491455
+Nothing worked as it should.,0,0,negative,negative,True,0.9996082186698914
+The experience was awful.,0,0,negative,negative,True,0.999659538269043
+I would not recommend this to anyone.,0,0,negative,negative,True,0.957747757434845
+The food was stale and tasteless.,0,0,negative,negative,True,0.9997121691703796
+The atmosphere was noisy and unpleasant.,0,0,negative,negative,True,0.9996639490127563
+The book was confusing and tedious to read.,0,0,negative,negative,True,0.9995613694190979
+"The app is slow, confusing, and unreliable.",0,0,negative,negative,True,0.9997255206108093
+The presentation was unclear and uninformative.,0,0,negative,negative,True,0.9993904829025269
+The trip was stressful and uncomfortable.,0,0,negative,negative,True,0.9989238381385803
+The game is repetitive and poorly designed.,0,0,negative,negative,True,0.9998244643211365
+The show failed to hold my attention.,0,0,negative,negative,True,0.9997655749320984
+The camera takes blurry and dull pictures.,0,0,negative,negative,True,0.9998118281364441
+The laptop is slow and struggles with basic tasks.,0,0,negative,negative,True,0.9993341565132141
+The headphones have distorted sound quality.,0,0,negative,negative,True,0.999699592590332
+The delivery arrived much later than promised.,0,0,negative,negative,True,0.9576598405838013
+The room was dirty and uncomfortable.,0,0,negative,negative,True,0.9996647834777832
+The course was poorly organized and unhelpful.,0,0,negative,negative,True,0.9997851252555847
+The explanation made the topic harder to understand.,0,0,negative,negative,True,0.9997876286506653
+The new update made the application worse.,0,0,negative,negative,True,0.9998133778572083
+The team handled the problem very unprofessionally.,0,0,negative,negative,True,0.994568943977356
+The concert was dull and disappointing.,0,0,negative,negative,True,0.9997838139533997
+The restaurant serves terrible food.,0,0,negative,negative,True,0.9816088080406189
+The design looks outdated and unattractive.,0,0,negative,negative,True,0.9997995495796204
+The battery runs out far too quickly.,0,0,negative,negative,True,0.9997591376304626
+The customer support ignored my issue.,0,0,negative,negative,True,0.9965516328811646
+The movie had a predictable and unpleasant plot.,0,0,negative,negative,True,0.9998050332069397
+The actors failed to make the characters believable.,0,0,negative,negative,True,0.9997588992118835
+The interface is confusing and difficult to use.,0,0,negative,negative,True,0.9996305704116821
+The instructions were inaccurate and unhelpful.,0,0,negative,negative,True,0.999022364616394
+The event was badly organized.,0,0,negative,negative,True,0.9997751116752625
+I had a terrible time today.,0,0,negative,negative,True,0.9985591769218445

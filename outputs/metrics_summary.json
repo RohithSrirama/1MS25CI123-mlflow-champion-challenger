@@ -1,0 +1,27 @@
+{
+    "model_a": {
+        "run_id": "49d293ac352740a49e2fb7835684df81",
+        "hf_model_id": "distilbert-base-uncased-finetuned-sst-2-english",
+        "accuracy": 0.97,
+        "precision": 0.9795918367346939,
+        "recall": 0.96,
+        "f1": 0.9696969696969697,
+        "avg_latency_ms": 12.865425999625586,
+        "total_inference_s": 1.2865425999625586
+    },
+    "model_b": {
+        "run_id": "2a925fa090c24caba037b19989bb779b",
+        "hf_model_id": "textattack/bert-base-uncased-SST-2",
+        "accuracy": 0.99,
+        "precision": 1.0,
+        "recall": 0.98,
+        "f1": 0.98989898989899,
+        "avg_latency_ms": 26.826603999943472,
+        "total_inference_s": 2.6826603999943472
+    },
+    "primary_metric": "accuracy",
+    "margin": 0.01,
+    "delta_primary_metric": 0.020000000000000018,
+    "winner": "B_sentiment_textattack-bert-sst2",
+    "decision": "Challenger replaces Champion"
+}
