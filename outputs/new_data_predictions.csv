@@ -1,11 +1,11 @@
 text,predicted_sentiment,model_alias,registered_model,model_version,hf_model_id
-I really enjoyed this experience.,POSITIVE,champion,sentiment-classifier,1,textattack/bert-base-uncased-SST-2
-The service was extremely disappointing.,NEGATIVE,champion,sentiment-classifier,1,textattack/bert-base-uncased-SST-2
-This product is amazing.,POSITIVE,champion,sentiment-classifier,1,textattack/bert-base-uncased-SST-2
-I will never recommend this.,POSITIVE,champion,sentiment-classifier,1,textattack/bert-base-uncased-SST-2
-The experience was satisfactory.,POSITIVE,champion,sentiment-classifier,1,textattack/bert-base-uncased-SST-2
-Absolutely loved everything.,POSITIVE,champion,sentiment-classifier,1,textattack/bert-base-uncased-SST-2
-The quality was very poor.,NEGATIVE,champion,sentiment-classifier,1,textattack/bert-base-uncased-SST-2
-The staff were friendly and helpful.,POSITIVE,champion,sentiment-classifier,1,textattack/bert-base-uncased-SST-2
-I regret choosing this option.,NEGATIVE,champion,sentiment-classifier,1,textattack/bert-base-uncased-SST-2
-Everything exceeded my expectations.,POSITIVE,champion,sentiment-classifier,1,textattack/bert-base-uncased-SST-2
+I really enjoyed this experience.,POSITIVE,champion,sentiment-classifier,3,textattack/bert-base-uncased-SST-2
+The service was extremely disappointing.,NEGATIVE,champion,sentiment-classifier,3,textattack/bert-base-uncased-SST-2
+This product is amazing.,POSITIVE,champion,sentiment-classifier,3,textattack/bert-base-uncased-SST-2
+I will never recommend this.,POSITIVE,champion,sentiment-classifier,3,textattack/bert-base-uncased-SST-2
+The experience was satisfactory.,POSITIVE,champion,sentiment-classifier,3,textattack/bert-base-uncased-SST-2
+Absolutely loved everything.,POSITIVE,champion,sentiment-classifier,3,textattack/bert-base-uncased-SST-2
+The quality was very poor.,NEGATIVE,champion,sentiment-classifier,3,textattack/bert-base-uncased-SST-2
+The staff were friendly and helpful.,POSITIVE,champion,sentiment-classifier,3,textattack/bert-base-uncased-SST-2
+I regret choosing this option.,NEGATIVE,champion,sentiment-classifier,3,textattack/bert-base-uncased-SST-2
+Everything exceeded my expectations.,POSITIVE,champion,sentiment-classifier,3,textattack/bert-base-uncased-SST-2
