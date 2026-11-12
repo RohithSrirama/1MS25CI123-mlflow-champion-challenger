@@ -143,6 +143,8 @@ The decision rule was defined **before** the final evaluation run and was not ch
 | Minimum improvement margin | The challenger must improve accuracy by at least **0.01** (one percentage point) to replace the current champion |
 | Tie-breaker | If the accuracy improvement is below 0.01, the model with lower average inference latency is preferred |
 | Latency direction | Lower average inference latency is better |
+| Why 0.01 | With 100 examples, 0.01 = 1 sentence. A gap smaller than one sentence cannot be a real improvement, so 0.01 is the minimum meaningful change. |
+| Metric direction | Accuracy, precision, recall and F1: higher is better. avg_latency_ms and total_inference_s: lower is better. |
 
 ## 5. Evaluation Results
 
@@ -159,6 +161,15 @@ Both models were evaluated on the same 100 labelled examples using CPU inference
 
 **Selected Champion: Model B — `textattack/bert-base-uncased-SST-2`**
 
+### Examples where the models disagree
+
+Only 2 of 100 sentences got different predictions, so all are shown.
+
+| Sentence | True | A | B | Comment |
+|---|---|---|---|---|
+| The delivery arrived earlier than expected. | positive | negative | positive | No obvious positive word; A misses the implied praise |
+| I would never watch this movie again. | negative | positive | negative | Negation ("never"); B handles it, A does not |
+
 ## 6. Decision
 
 Model B is selected as the champion. It achieved an accuracy of 0.99 versus 0.97 for Model A. The absolute improvement of 0.02 (two percentage points) exceeds the pre-defined minimum margin of 0.01. Model B also produced higher precision, recall and F1-score on this evaluation set.
@@ -174,6 +185,7 @@ Model B is selected as the champion. It achieved an accuracy of 0.99 versus 0.97
 - Both models are SST-2 sentiment classifiers; performance may be weaker on text from domains unlike their training data.
 - Latency was measured on CPU in a local environment and may differ on other hardware or under different system load.
 - Individual predictions can be incorrect even when overall evaluation metrics are high.
+- On new data the Champion predicted "I will never recommend this." as POSITIVE, so negation is still a weakness. The custom evaluation set is short and simple, so both models score near 100% and the comparison has little room to separate them.
 
 ## 8. Tools and AI Assistance Declaration
 
