@@ -1,15 +1,19 @@
 """
-Champion inference using MLflow Registry alias.
-Reads data/new_data.csv by default and writes outputs/new_data_predictions.csv.
+Load the Champion model through its MLflow Registry alias, display its
+registered version and Hugging Face model ID, predict 10 new examples, and
+save the predictions to outputs/new_data_predictions.csv.
+
+Run from the project root:
+    python predict_from_mlflow.py
 """
 
-import argparse
 import os
 import sys
 from pathlib import Path
 
 import mlflow
 import pandas as pd
+from mlflow.tracking import MlflowClient
 
 TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI", "http://127.0.0.1:5000")
 REGISTERED_MODEL_NAME = "sentiment-classifier"
@@ -18,25 +22,27 @@ NEW_DATA_PATH = Path("data") / "new_data.csv"
 OUTPUT_PATH = Path("outputs") / "new_data_predictions.csv"
 
 
-def load_texts(cli_texts):
-    if cli_texts:
-        texts = cli_texts
-    else:
-        if not NEW_DATA_PATH.exists():
-            raise FileNotFoundError(f"Missing {NEW_DATA_PATH}")
-        df = pd.read_csv(NEW_DATA_PATH)
-        if "text" not in df.columns:
-            raise ValueError("data/new_data.csv must have a 'text' column.")
-        texts = df["text"].dropna().astype(str).tolist()
+def load_input_texts():
+    if not NEW_DATA_PATH.exists():
+        raise FileNotFoundError(f"Input file not found: {NEW_DATA_PATH}")
 
-    texts = [str(x).strip() for x in texts if str(x).strip()]
-    if not texts:
-        raise ValueError("No non-empty texts to predict.")
+    dataframe = pd.read_csv(NEW_DATA_PATH)
+    if "text" not in dataframe.columns:
+        raise ValueError(f"{NEW_DATA_PATH} must contain a 'text' column.")
+
+    texts = dataframe["text"].dropna().astype(str).str.strip().tolist()
+    texts = [text for text in texts if text]
+
+    if len(texts) != 10:
+        raise ValueError(
+            f"Expected exactly 10 non-empty examples in {NEW_DATA_PATH}; "
+            f"found {len(texts)}."
+        )
     return texts
 
 
-def normalize_label(value):
-    value = str(value).strip()
+def normalize_prediction(prediction):
+    value = str(prediction).strip()
     upper = value.upper()
     if upper in {"POSITIVE", "LABEL_1", "1"}:
         return "POSITIVE"
@@ -45,61 +51,99 @@ def normalize_label(value):
     return value
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("texts", nargs="*", help="Optional texts to classify.")
-    args = parser.parse_args()
+def get_champion_metadata(client):
+    version_info = client.get_model_version_by_alias(
+        name=REGISTERED_MODEL_NAME,
+        alias=CHAMPION_ALIAS,
+    )
 
+    hf_model_id = version_info.tags.get("hf_model_id")
+    source_run_id = version_info.tags.get("source_run_id")
+
+    # register_champion.py stores source_run_id; evaluate.py logs hf_model_id
+    # as a run parameter, so retrieve it from the source run when needed.
+    if not hf_model_id and source_run_id:
+        source_run = client.get_run(source_run_id)
+        hf_model_id = source_run.data.params.get("hf_model_id")
+
+    if not hf_model_id:
+        hf_model_id = (
+            "Not recorded in MLflow model-version tags or source-run parameters"
+        )
+
+    return str(version_info.version), hf_model_id
+
+
+def extract_predictions(predictions):
+    if isinstance(predictions, pd.DataFrame):
+        if "prediction" in predictions.columns:
+            return predictions["prediction"].tolist()
+        return predictions.iloc[:, 0].tolist()
+    if isinstance(predictions, pd.Series):
+        return predictions.tolist()
+    return list(predictions)
+
+
+def main():
     mlflow.set_tracking_uri(TRACKING_URI)
+    client = MlflowClient(tracking_uri=TRACKING_URI)
     model_uri = f"models:/{REGISTERED_MODEL_NAME}@{CHAMPION_ALIAS}"
 
-    print("Loading Champion model from MLflow...")
-    print(f"Tracking URI : {TRACKING_URI}")
-    print(f"Model URI    : {model_uri}")
+    print("=" * 72)
+    print("CHAMPION MODEL INFORMATION")
+    print("=" * 72)
+    print(f"Registered model : {REGISTERED_MODEL_NAME}")
+    print(f"Champion alias   : @{CHAMPION_ALIAS}")
+    print(f"MLflow model URI : {model_uri}")
 
     try:
+        model_version, hf_model_id = get_champion_metadata(client)
         model = mlflow.pyfunc.load_model(model_uri)
     except Exception as exc:
         raise RuntimeError(
-            "Could not load Champion alias. Check the MLflow server and run "
-            "register_champion.py first."
+            "Could not load the Champion model or retrieve its metadata. "
+            "Check that the MLflow server is running and that the "
+            "'champion' alias exists. Run register_champion.py first."
         ) from exc
 
-    texts = load_texts(args.texts)
-    predictions = model.predict(pd.DataFrame({"text": texts}))
+    print(f"Registered version: {model_version}")
+    print(f"Hugging Face ID   : {hf_model_id}")
 
-    if isinstance(predictions, pd.DataFrame):
-        raw = (predictions["prediction"].tolist()
-               if "prediction" in predictions.columns
-               else predictions.iloc[:, 0].tolist())
-    elif isinstance(predictions, pd.Series):
-        raw = predictions.tolist()
-    else:
-        raw = list(predictions)
+    texts = load_input_texts()
+    predictions = extract_predictions(
+        model.predict(pd.DataFrame({"text": texts}))
+    )
 
-    if len(raw) != len(texts):
-        raise RuntimeError("Number of predictions does not match input texts.")
+    if len(predictions) != len(texts):
+        raise RuntimeError(
+            f"Received {len(predictions)} predictions for {len(texts)} inputs."
+        )
 
-    labels = [normalize_label(x) for x in raw]
-    result = pd.DataFrame({
+    labels = [normalize_prediction(value) for value in predictions]
+    results = pd.DataFrame({
         "text": texts,
         "predicted_sentiment": labels,
-        "model_alias": CHAMPION_ALIAS,
-        "model_name": REGISTERED_MODEL_NAME,
+        "model_alias": [CHAMPION_ALIAS] * len(texts),
+        "registered_model": [REGISTERED_MODEL_NAME] * len(texts),
+        "model_version": [model_version] * len(texts),
+        "hf_model_id": [hf_model_id] * len(texts),
     })
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    result.to_csv(OUTPUT_PATH, index=False)
+    results.to_csv(OUTPUT_PATH, index=False)
 
-    print("\nChampion predictions")
+    print("\n" + "=" * 72)
+    print("CHAMPION PREDICTIONS")
     print("=" * 72)
-    for i, (text, label) in enumerate(zip(texts, labels), start=1):
-        print(f"\n{i}. Text: {text}")
+    for index, (text, label) in enumerate(zip(texts, labels), start=1):
+        print(f"\n{index}. Text: {text}")
         print(f"   Predicted sentiment: {label}")
 
     print("\n" + "=" * 72)
-    print(f"Completed {len(texts)} predictions using the MLflow Champion alias.")
-    print(f"Saved predictions to: {OUTPUT_PATH}")
+    print(f"Completed {len(texts)} predictions using @{CHAMPION_ALIAS}.")
+    print(f"Registered model version: {model_version}")
+    print(f"Hugging Face model ID: {hf_model_id}")
+    print(f"Saved CSV: {OUTPUT_PATH.resolve()}")
 
 
 if __name__ == "__main__":
