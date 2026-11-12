@@ -156,8 +156,8 @@ Both models were evaluated on the same 100 labelled examples using CPU inference
 | Precision | 0.9796 | **1.0000** | +0.0204 |
 | Recall | 0.9600 | **0.9800** | +0.0200 |
 | F1-score | 0.9697 | **0.9899** | +0.0202 |
-| Average latency (ms) | **12.8654** | 26.8266 | +13.9612 |
-| Total inference time (s) | **1.2865** | 2.6827 | +1.3962 |
+| Average latency (ms) | **12.5108** | 25.4740 | +12.9632 |
+| Total inference time (s) | **1.2511** | 2.5474 | +1.2963 |
 
 **Selected Champion: Model B — `textattack/bert-base-uncased-SST-2`**
 
@@ -174,7 +174,7 @@ Only 2 of 100 sentences got different predictions, so all are shown.
 
 Model B is selected as the champion. It achieved an accuracy of 0.99 versus 0.97 for Model A. The absolute improvement of 0.02 (two percentage points) exceeds the pre-defined minimum margin of 0.01. Model B also produced higher precision, recall and F1-score on this evaluation set.
 
-**Latency trade-off:** Model B required approximately 26.83 ms per example, while Model A required approximately 12.87 ms, so Model A was faster in this CPU evaluation. Under the decision rule, the accuracy gain takes priority once it reaches the required margin, so Model B replaces Model A.
+**Latency trade-off:** Model B required approximately 25.47 ms per example, while Model A required approximately 12.51 ms, so Model A was faster in this CPU evaluation. Under the decision rule, the accuracy gain takes priority once it reaches the required margin, so Model B replaces Model A.
 
 **Interpret with caution.** The evaluation contains only 100 examples and uses a custom-created dataset rather than the official SST-2 evaluation split. A two-percentage-point difference on a sample this size may not generalise to other data, and the models may behave differently on text from domains unlike their fine-tuning data. A larger, representative, independently labelled test set and repeated latency measurements would provide stronger evidence.
 
